@@ -29,11 +29,13 @@ public class Post {
     @NotEmpty
     private String content;
     
-    /** The created on. */
+    /** The created on. 
+     * data da criação*/
     @Column
     private Instant createdOn;
     
-    /** The updated on. */
+    /** The updated on. 
+     * data da atualização*/
     @Column
     private Instant updatedOn;
     

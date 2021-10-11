@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Table(name="TB_USER")
 public class User {
     
-    /** The id. */
+    /** The id. 
+     * Geração de tabela automática ao iniciar a aplicação
+     * @GeneratedValue(strategy = GenerationType.AUTO*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
