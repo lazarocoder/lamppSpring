@@ -32,12 +32,21 @@ public class AuthController {
      * @param registerRequest the register request
      * @return the response entity
      */
-    @GetMapping("/signup")
+    /*@GetMapping("/signup")
+    public ResponseEntity signup(@RequestBody RegisterRequest registerRequest) {
+        authService.signup(registerRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }*/
+
+    @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
-
+    
+    
+    
+    
     /**
      * Login.
      *

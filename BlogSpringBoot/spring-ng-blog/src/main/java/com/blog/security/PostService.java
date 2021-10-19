@@ -1,20 +1,21 @@
 package com.blog.security;
 
-import com.blog.dto.PostDto;
-import com.blog.exception.PostNotFoundException;
-import com.blog.model.Post;
-import com.blog.repository.PostRepository;
-import com.blog.service.AuthService;
+import static java.util.stream.Collectors.toList;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import com.blog.dto.PostDto;
+import com.blog.exception.PostNotFoundException;
+import com.blog.model.Post;
+import com.blog.repository.PostRepository;
+import com.blog.service.AuthService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -23,6 +24,8 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class PostService {
 
+	private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
     /** The auth service. */
     @Autowired
     private AuthService authService;
@@ -52,6 +55,15 @@ public class PostService {
         Post post = mapFromDtoToPost(postDto);
         postRepository.save(post);
     }
+    
+    @Transactional
+    public PostDto updatePost(Long id, PostDto postDto) {
+    	Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("For id " + id));
+    	post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContent());
+        postRepository.save(post);
+        return mapFromPostToDto(post);
+    }
 
     /**
      * Read single post.
@@ -77,6 +89,10 @@ public class PostService {
         postDto.setTitle(post.getTitle());
         postDto.setContent(post.getContent());
         postDto.setUserName(post.getUserName());
+        postDto.setCreatedOn(dtf.format(post.getCreatedOn()));
+        if(post.getUpdatedOn() != null) {
+        	postDto.setUpdatedOn(dtf.format(post.getUpdatedOn()));        	
+        }
         return postDto;
     }
 
@@ -91,9 +107,14 @@ public class PostService {
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
         User loggedInUser = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("User Not Found"));
-        post.setCreatedOn(Instant.now());
+        post.setCreatedOn(LocalDateTime.now());
         post.setUsername(loggedInUser.getUsername());
-        post.setUpdatedOn(Instant.now());
+        post.setUpdatedOn(LocalDateTime.now());
         return post;
     }
+
+    @Transactional
+	public void deletePost(Long id) {
+		postRepository.deleteById(id);
+	}
 }

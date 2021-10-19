@@ -1,10 +1,14 @@
 package com.blog.dto;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class PostDto.
  */
-public class PostDto {
+public class CommentDto {
     
     /** The id. */
     private Long id;
@@ -12,17 +16,17 @@ public class PostDto {
     /** The content. */
     private String content;
     
-    /** The title. */
-    private String title;
-    
     /** The user name. */
     private String userName;
     
     /** The created on. */
     private String createdOn;
     
-    /** The updated on. */
-    private String updatedOn;
+    /** The post id. */
+    private Long postId;
+    
+	/** The updated on. */
+	private String updatedOn;
 
     /**
      * Gets the id.
@@ -61,24 +65,6 @@ public class PostDto {
     }
 
     /**
-     * Gets the title.
-     *
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
      * Gets the user name.
      *
      * @return the user name
@@ -112,6 +98,24 @@ public class PostDto {
 	 */
 	public void setCreatedOn(String createdOn) {
 		this.createdOn = createdOn;
+	}
+
+	/**
+	 * Gets the post id.
+	 *
+	 * @return the post id
+	 */
+	public Long getPostId() {
+		return postId;
+	}
+
+	/**
+	 * Sets the post id.
+	 *
+	 * @param postId the new post id
+	 */
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
 
 	/**
