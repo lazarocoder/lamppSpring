@@ -3,7 +3,7 @@ package com.blog.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,12 +32,12 @@ public class Post {
     /** The created on. 
      * data da criação*/
     @Column
-    private Instant createdOn;
+    private LocalDateTime createdOn;
     
     /** The updated on. 
      * data da atualização*/
     @Column
-    private Instant updatedOn;
+    private LocalDateTime updatedOn;
     
     /** The user name. */
     @Column
@@ -103,7 +103,7 @@ public class Post {
      *
      * @return the created on
      */
-    public Instant getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
@@ -112,7 +112,7 @@ public class Post {
      *
      * @param createdOn the new created on
      */
-    public void setCreatedOn(Instant createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 
@@ -121,7 +121,7 @@ public class Post {
      *
      * @return the updated on
      */
-    public Instant getUpdatedOn() {
+    public LocalDateTime getUpdatedOn() {
         return updatedOn;
     }
 
@@ -130,7 +130,7 @@ public class Post {
      *
      * @param updatedOn the new updated on
      */
-    public void setUpdatedOn(Instant updatedOn) {
+    public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
 
