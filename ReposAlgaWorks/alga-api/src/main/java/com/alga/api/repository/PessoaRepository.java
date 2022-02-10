@@ -11,6 +11,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 	public List<Pessoa> findByAtivo(Boolean ativo);;
 
 	public Pessoa findByCodigo(Long codigo);
+	
 
 	
 
